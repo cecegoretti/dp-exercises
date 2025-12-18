@@ -1,0 +1,18 @@
+#return the longest palindromic substring of s
+
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        dp=[[0]*len(s) for j in range(len(s))] #dp[i]=longest palind substr that ends in position i
+        for j in range(len(s)):
+            dp[j][j]=1
+        for j in range(len(s)-1):
+            dp[j][j+1]=int(s[j]==s[j+1])
+        for j in range(2,len(s)):
+            for k in range(len(s)-j):
+                dp[k][k+j]=int(s[k]==s[k+j])*dp[k+1][k+j-1]
+        secret_word=""
+        for j in range(len(s)):
+            for k in range(j,len(s)):
+                if dp[j][k]==1 and k-j+1>len(secret_word):
+                    secret_word=s[j:k+1]
+        return secret_word
