@@ -5,9 +5,9 @@
 
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
-        #dp sul numero di caratteri di s e su quelli di t
+        #dp on the number of characters of s and of t
         dp=[[0]*(len(s)+1) for J in range(len(t)+1)]
-        #dp[i][j] usa i caratteri di t e j caratteri di s
+        #dp[i][j] uses i characters from t and j characters from s
         if len(t)==1:
             return s.count(t)
         for j in range(1,len(s)+1): 
