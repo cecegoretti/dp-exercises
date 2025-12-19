@@ -1,10 +1,18 @@
 #given strings s and t find how many subsequences of s (not necessarly substrings) equal t
 #leetcode exercise: https://leetcode.com/problems/distinct-subsequences/?envType=problem-list-v2&envId=dynamic-programming
 #2D pd
-#memory used: O(len(s)+len(t)), computational cost: O(len(s)*len(t))
 
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
+              """
+        Count the number of distinct subsequences of s that equal t.
+
+        DP approach:
+        dp[i][j] = number of subsequences of s[:j] equal to t[:i]
+
+        Time complexity: O(len(s) * len(t))
+        Space complexity: O(len(s) * len(t))
+        """
         #dp on the number of characters of s and of t
         dp=[[0]*(len(s)+1) for J in range(len(t)+1)]
         #dp[i][j] uses i characters from t and j characters from s
