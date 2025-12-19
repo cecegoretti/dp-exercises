@@ -3,7 +3,7 @@
 #alternative approach: in this case obstacle are taken into account when doing the next move. It can also be optimized by taking into 
 account obstacle if they are in the cell you are computing, and setting the value of paths to 0 if there is an obstacle. Once this 
 test is done, then the update function would work as in the normal way of computing paths without obstacles.
-#computational cost: memory m*n, complexity: m*n
+#computational cost: memory O(m*n), complexity: O(m*n)
 
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
