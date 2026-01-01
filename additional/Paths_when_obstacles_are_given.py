@@ -1,29 +1,28 @@
-#compute number of paths from top left corner to bottom right (by moving only down and right) when a grid of obstacles is given
-#leetcode exercise: https://leetcode.com/problems/unique-paths-ii/?envType=problem-list-v2&envId=dynamic-programming
-#alternative approach: in this case obstacle are taken into account when doing the next move. It can also be optimized by taking into 
-account obstacle if they are in the cell you are computing, and setting the value of paths to 0 if there is an obstacle. Once this 
-test is done, then the update function would work as in the normal way of computing paths without obstacles.
-#computational cost: memory O(m*n), complexity: O(m*n)
+#exercise: https://leetcode.com/problems/unique-paths-ii/?envType=problem-list-v2&envId=dynamic-programming
 
-class Solution:
-    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
-        m=len(obstacleGrid)
-        n=len(obstacleGrid[0])
-        if obstacleGrid[m-1][n-1]==1 or obstacleGrid[0][0]==1:
-            return 0
-        paths=[[0]*n for j in range(m)]
-        paths[m-1][n-1]=1
-        for k in range(1,m):
-            if obstacleGrid[m-1-k][n-1]==1:
-                paths[m-1-k][n-1]=0
-            else:
-                paths[m-1-k][n-1]=paths[m-1-k+1][n-1]
-        for j in range(1,n):
-            if obstacleGrid[m-1][n-1-j]==1:
-                paths[m-1][n-1-j]=0
-            else:
-                paths[m-1][n-1-j]=paths[m-1][n-1-j+1]
+def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+    '''this function computes the number of paths from top left corner 
+    to bottom right (by moving only down and right) when a grid of 
+    obstacles is given. Space complexity and memory complexity are
+    O(m*n) where m,n is the dimension of the grid.
+    '''
+    m=len(obstacleGrid)
+    n=len(obstacleGrid[0])
+    if obstacleGrid[m-1][n-1]==1 or obstacleGrid[0][0]==1:
+        return 0
+    paths=[[0]*n for j in range(m)]
+    paths[m-1][n-1]=1
+    for k in range(1,m):
+        if obstacleGrid[m-1-k][n-1]==1:
+            paths[m-1-k][n-1]=0
+        else:
+            paths[m-1-k][n-1]=paths[m-1-k+1][n-1]
+    for j in range(1,n):
+        if obstacleGrid[m-1][n-1-j]==1:
+            paths[m-1][n-1-j]=0
+        else:
+            paths[m-1][n-1-j]=paths[m-1][n-1-j+1]
         for j in range(1,n):
             for k in range(1,m):
-                    paths[m-1-k][n-1-j]=(1-obstacleGrid[m-k][n-1-j])*paths[m-k][n-1-j]+(1-obstacleGrid[m-1-k][n-j])*paths[m-1-k][n-j]
-        return paths[0][0] 
+                paths[m-1-k][n-1-j]=(1-obstacleGrid[m-k][n-1-j])*paths[m-k][n-1-j]+(1-obstacleGrid[m-1-k][n-j])*paths[m-1-k][n-j]
+    return paths[0][0] 
